@@ -1,4 +1,4 @@
-# SentinelLab-Mini-SOC-de-Detecci-n-y-Respuesta
+# SentinelLab-Mini-SOC-de-Deteccion-y-Respuesta
 
 Entorno casero de monitorización de seguridad construido sobre 2 máquinas virtuales, alineado con los contenidos del curso **"Optimización y Gestión de la Monitorización de Seguridad"** (OpenWebinars). 
 > 🚧 Proyecto en progreso — este README se actualiza a medida que se completa cada bloque.
