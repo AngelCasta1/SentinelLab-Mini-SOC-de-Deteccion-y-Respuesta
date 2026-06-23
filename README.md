@@ -18,6 +18,13 @@ Demostrar de forma práctica un ciclo completo de monitorización de seguridad: 
 | **VM 1 — Objetivo + Sensor** | Servicio SSH/web expuesto · Syslog · Snort/Suricata (IDS) · agente Wazuh | Ubuntu Server 22.04 |
 | **VM 2 — SIEM y gestión** | Wazuh (SIEM) · Grafana · DefectDojo · Cortex (SOAR) | Ubuntu Server 22.04 |
 
+### Componentes
+
+| Máquina | Rol | SO | IP Puente | IP Interna |
+|---------|-----|----|-----------|------------|
+| **VM1** | Objetivo + Sensores | Ubuntu Server 22.04 | 192.168.20.20 
+| **VM2** | SIEM + Gestión | Ubuntu Server 22.04 | 192.168.20.30 
+
 El equipo atacante (Kali Linux) opera desde fuera de este entorno y no cuenta como máquina del laboratorio.
 
 ```
