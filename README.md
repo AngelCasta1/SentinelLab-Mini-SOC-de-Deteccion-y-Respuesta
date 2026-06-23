@@ -20,8 +20,8 @@ Demostrar de forma práctica un ciclo completo de monitorización de seguridad: 
 
 ### Componentes
 
-| Máquina | Rol | SO | IP Puente | IP Interna |
-|---------|-----|----|-----------|------------|
+| Máquina | Rol | SO | IP Interna |
+|---------|-----|----|------------|
 | **VM1** | Objetivo + Sensores | Ubuntu Server 22.04 | 192.168.20.20 
 | **VM2** | SIEM + Gestión | Ubuntu Server 22.04 | 192.168.20.30 
 
