@@ -30,7 +30,7 @@ Demostrar de forma práctica un **ciclo completo de monitorización de seguridad
 
 ### Diagrama de Red
 <p align="center">
-  <img src="docs/images/arquitectura.png" alt="Arquitectura del Mini-SOC" width="800"/>
+  <img src="IMG_Arquitectura.png" alt="Arquitectura del Mini-SOC" width="800"/>
   <br>
   <em>Diagrama de arquitectura del entorno SentinelLab</em>
 </p>
