@@ -6,7 +6,7 @@
 
 [![Estado](https://img.shields.io/badge/Estado-En%20Desarrollo-7C6FCD?style=for-the-badge)](.)
 [![Bloque](https://img.shields.io/badge/Bloque%20Actual-2%20%2F%206-4B3FA0?style=for-the-badge)](.)
-[![Plataforma](https://img.shields.io/badge/OpenWebinars-Certificado-5E4DB2?style=for-the-badge)](.)
+[![Plataforma](https://img.shields.io/badge/OpenWebinars-Certificado-5E4DB2?style=for-the-badge)](Certificado_Curso_AngelCastaño.pdf)
 
 <br/>
 
