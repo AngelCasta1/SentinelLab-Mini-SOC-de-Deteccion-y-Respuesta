@@ -27,7 +27,7 @@
 
 Entorno casero de monitorización de seguridad que recorre de forma práctica los **6 bloques** del certificado **"Optimización y Gestión de la Monitorización de Seguridad"** de OpenWebinars. Construido sobre 2 VMs y documentado con informe técnico completo.
 
-📎 **[Descargar Informe Técnico PDF](__SentinelLab-MiniSOC-Informe-Técnico.pdf)**
+📎 **[Descargar Informe Técnico PDF](SentinelLab-MiniSOC-Informe-Técnico.pdf)**
 
 ---
 
