@@ -1,159 +1,39 @@
-# SentinelLab-Mini-SOC-de-Deteccion-y-Respuesta
+# 🛡️ SentinelLab — Mini-SOC de Detección y Respuesta
 
-Entorno casero de monitorización de seguridad construido sobre 2 máquinas virtuales, alineado con los contenidos del curso **"Optimización y Gestión de la Monitorización de Seguridad"** (OpenWebinars). 
-> 🚧 Proyecto en progreso — este README se actualiza a medida que se completa cada bloque.
+![Ubuntu](https://img.shields.io/badge/Ubuntu-22.04-E95420?style=flat&logo=ubuntu&logoColor=white)
+![Wazuh](https://img.shields.io/badge/Wazuh-SIEM-005571?style=flat)
+![Suricata](https://img.shields.io/badge/Suricata-IDS-EF3B2D?style=flat)
+![Snort](https://img.shields.io/badge/Snort-IDS-red?style=flat)
+![Estado](https://img.shields.io/badge/Estado-En%20Desarrollo-yellow?style=flat)
+![Bloque](https://img.shields.io/badge/Bloque-2%2F6-blue?style=flat)
 
----
+Entorno casero de monitorización de seguridad construido sobre **2 máquinas virtuales**, alineado con el certificado **"Optimización y Gestión de la Monitorización de Seguridad"** de OpenWebinars.
 
-## 🎯 Objetivo
-
-Demostrar de forma práctica un ciclo completo de monitorización de seguridad: desde la centralización de logs hasta la detección, correlación en SIEM, enriquecimiento con threat intelligence, gestión de vulnerabilidades y versionado de reglas como código.
-
----
-
-## 🖥️ Arquitectura
-
-| Máquina | Rol | SO |
-|---|---|---|
-| **VM 1 — Objetivo + Sensor** | Servicio SSH/web expuesto · Syslog · Snort/Suricata (IDS) · agente Wazuh | Ubuntu Server 22.04 |
-| **VM 2 — SIEM y gestión** | Wazuh (SIEM) · Grafana · DefectDojo · Cortex (SOAR) | Ubuntu Server 22.04 |
-
-### Componentes
-
-| Máquina | Rol | SO | IP |
-|---------|-----|----|----|
-| **VM1** | Objetivo + Sensores | Ubuntu Server 22.04 | 192.168.20.20 |
-| **VM2** | SIEM + Gestión | Ubuntu Server 22.04 | 192.168.20.30 |
-| **Kali** | Atacante interno | Kali Linux | 192.168.20.40 |
-
-El equipo atacante (Kali Linux) opera desde fuera de este entorno y no cuenta como máquina del laboratorio.
-
-```
-[ Kali - Atacante ]
-        │
-        ▼
-[ VM1: Objetivo + Sensor ]──Syslog/Snort/Suricata/Wazuh-agent──▶[ VM2: SIEM (Wazuh + Grafana) ]
-                                                                          │
-                                                                          ▼
-                                                          DefectDojo · Cortex · Dashboards
-```
-
-*(Diagrama ampliado pendiente — se añadirá una imagen en `/docs/arquitectura.png`)*
+> 🚧 **Proyecto en progreso** — este README se actualiza a medida que se completa cada bloque.
 
 ---
 
-## 📋 Progreso por bloques
+## 🎯 Objetivo del Proyecto
 
-| Bloque | Contenido | Estado |
-|---|---|---|
-| 1 | Fundamentos: arquitectura y Syslog | ⬜ Pendiente |
-| 2 | Detección en red/endpoint: Snort, Suricata, YARA, Wazuh | ⬜ Pendiente |
-| 3 | Reglas y correlación en SIEM (Wazuh + Sigma + dashboards) | ⬜ Pendiente |
-| 4 | Threat Intelligence & SOAR | ⬜ Pendiente |
-| 5 | Gestión de vulnerabilidades (OpenVAS + DefectDojo) | ⬜ Pendiente |
-| 6 | Detection as Code | ⬜ Pendiente |
+Demostrar de forma práctica un **ciclo completo de monitorización de seguridad**:
 
----
-
-## 🧱 Bloque 1 — Fundamentos y Syslog
-
-**Qué se hizo:**
-- _Pendiente de completar_
-
-**Capturas:**
-- _Pendiente_
+- ✅ Centralización de logs (Syslog)
+- ✅ Detección activa en red y endpoint (Snort, Suricata, Wazuh)
+- ⏳ Correlación en SIEM (Wazuh Server + Grafana)
+- ⏳ Enriquecimiento con Threat Intelligence (AbuseIPDB, OTX, ThreatFox)
+- ⏳ Gestión de vulnerabilidades (OpenVAS + DefectDojo)
+- ⏳ Detection as Code (Versionado de reglas + CI/CD)
 
 ---
 
-## 🛡️ Bloque 2 — Detección en red y endpoint
+## 🏗️ Arquitectura del Entorno
 
-**Qué se hizo:**
-- _Pendiente de completar_
-
-**Reglas creadas:**
-- `rules/snort/` — _pendiente_
-- `rules/suricata/` — _pendiente_
-- `rules/yara/` — _pendiente_
-
-**Capturas:**
-- _Pendiente_
-
----
-
-## 🔗 Bloque 3 — SIEM y correlación
-
-**Qué se hizo:**
-- _Pendiente de completar_
-
-**Reglas Sigma creadas:**
-- `rules/sigma/` — _pendiente_
-
-**Métricas obtenidas:**
-| Indicador | Valor |
-|---|---|
-| MTTD (Mean Time To Detect) | _pendiente_ |
-| Falsos positivos detectados | _pendiente_ |
-
-**Capturas del dashboard:**
-- _Pendiente_
-
----
-
-## 🌐 Bloque 4 — Threat Intelligence & SOAR
-
-**Qué se hizo:**
-- _Pendiente de completar_
-
-**Fuentes OSINT utilizadas:** AbuseIPDB · OTX (AlienVault) · ThreatFox
-
----
-
-## 🔍 Bloque 5 — Gestión de vulnerabilidades
-
-**Qué se hizo:**
-- _Pendiente de completar_
-
-**Hallazgos clasificados en DefectDojo:**
-- _Pendiente_
-
----
-
-## ⚙️ Bloque 6 — Detection as Code
-
-**Qué se hizo:**
-- _Pendiente de completar_
-
----
-
-## 📂 Estructura del repositorio
-
-```
-mini-soc-suricata-wazuh/
-├── README.md
-├── docs/
-│   └── arquitectura.png
-├── rules/
-│   ├── snort/
-│   ├── suricata/
-│   ├── sigma/
-│   └── yara/
-└── scripts/
-    └── (scripts de validación / CI para las reglas)
-```
-
----
-
-## 🧰 Herramientas utilizadas
-
-`Syslog (rsyslog)` · `Snort` · `Suricata` · `YARA` · `Wazuh` · `Grafana` · `Sigma` · `AbuseIPDB` · `OTX` · `ThreatFox` · `Cortex` · `OpenVAS` · `DefectDojo`
-
----
-
-## 🔗 Proyectos relacionados
-
-- [TechSolutions AI — TFG ASIR](https://github.com/AngelCasta1/TechSolutions-AI) — infraestructura corporativa base sobre la que se apoya este proyecto.
-
----
+### Diagrama de Red
+<p align="center">
+  <img src="docs/images/arquitectura.png" alt="Arquitectura del Mini-SOC" width="800"/>
+  <br>
+  <em>Diagrama de arquitectura del entorno SentinelLab</em>
+</p>
 
 ## 👤 Autor
 
