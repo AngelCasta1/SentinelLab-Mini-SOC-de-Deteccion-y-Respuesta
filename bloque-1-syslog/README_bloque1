@@ -1,0 +1,166 @@
+# 📦 Bloque 1 — Fundamentos y Syslog
+
+[![Estado](https://img.shields.io/badge/Estado-Completado-4B3FA0?style=flat)](.)
+[![Herramienta](https://img.shields.io/badge/rsyslog-Centralización-7C6FCD?style=flat)](.)
+[![Servicio](https://img.shields.io/badge/OpenSSH-Puerto%2022-E95420?style=flat)](.)
+[![Servicio](https://img.shields.io/badge/Apache2-Puerto%2080-CC0000?style=flat)](.)
+
+[← Volver al README principal](../README.md)
+
+---
+
+## 🎯 Objetivo del Bloque
+
+Establecer la base del entorno de monitorización:
+
+- Diseñar la arquitectura de red del mini-SOC
+- Exponer servicios reales (SSH, HTTP) como superficie de ataque simulada
+- Configurar rsyslog para centralizar eventos críticos en `/var/log/sentinellab/`
+- Contrastar monitorización pasiva (logs) vs activa (IDS en tiempo real)
+
+---
+
+## 🖥️ Servicios instalados en VM1
+
+### OpenSSH Server
+
+| Campo | Valor |
+|---|---|
+| Puerto | 22 / TCP |
+| Función | Simular servidor SSH expuesto al atacante |
+| Estado | enabled · active |
+
+```bash
+# Instalación
+sudo apt install openssh-server -y
+sudo systemctl enable ssh
+sudo systemctl start ssh
+
+# Verificación
+sudo systemctl status ssh
+```
+
+---
+
+### Apache2
+
+| Campo | Valor |
+|---|---|
+| Puerto | 80 / TCP |
+| Función | Simular servidor web expuesto al atacante |
+| Estado | enabled · active |
+
+```bash
+# Instalación
+sudo apt install apache2 -y
+sudo systemctl enable apache2
+sudo systemctl start apache2
+
+# Verificación desde Kali
+curl http://192.168.20.20
+```
+
+---
+
+## 📋 Configuración de rsyslog
+
+### Fichero de configuración personalizado
+
+Ruta: `/etc/rsyslog.d/50-sentinellab.conf`
+
+```bash
+# ============================================
+# SentinelLab — Reglas de monitorización
+# VM1 — Objetivo + Sensor
+# ============================================
+
+# 1. Intentos de login SSH y autenticación
+auth,authpriv.*         /var/log/sentinellab/auth.log
+
+# 2. Mensajes del kernel
+kern.*                  /var/log/sentinellab/kernel.log
+
+# 3. Warnings o superior de cualquier servicio
+*.warn                  /var/log/sentinellab/warnings.log
+```
+
+### Creación del directorio de logs
+
+```bash
+sudo mkdir -p /var/log/sentinellab
+sudo chown syslog:adm /var/log/sentinellab
+sudo systemctl restart rsyslog
+```
+
+### Estructura de logs resultante
+
+```
+/var/log/sentinellab/
+├── auth.log
+├── kernel.log
+└── warnings.log
+
+0 directories, 3 files
+```
+
+---
+
+## 🧪 Pruebas realizadas y resultados
+
+### Prueba 1 — Intentos SSH fallidos
+
+**Desde Kali Linux**, se realizaron varios intentos de login fallidos contra VM1:
+
+```bash
+ssh usuariofalso@192.168.20.20
+ssh root@192.168.20.20
+```
+
+**Resultado detectado en VM1** (`/var/log/sentinellab/auth.log`):
+
+```
+Jul 1 22:10:29 vm1 sshd[3630]: Invalid user usuariofalso from 192.168.20.30 port 47002
+Jul 1 22:10:32 vm1 sshd[3630]: pam_unix(sshd:auth): check pass; user unknown
+Jul 1 22:10:32 vm1 sshd[3630]: pam_unix(sshd:auth): authentication failure
+Jul 1 22:10:35 vm1 sshd[3630]: Failed password for invalid user usuariofalso from 192.168.20.30
+Jul 1 22:10:51 vm1 sshd[3632]: Failed password for root from 192.168.20.30 port 54188 ssh2
+Jul 1 22:10:51 vm1 sshd[3632]: Connection closed by authenticating user root 192.168.20.30
+```
+
+✅ **Conclusión:** Los intentos de autenticación fallida quedan correctamente registrados en `auth.log`, confirmando que rsyslog captura eventos críticos de SSH en tiempo real.
+
+---
+
+### Prueba 2 — Accesos web anómalos
+
+**Desde Kali Linux**, se realizaron peticiones HTTP a rutas inexistentes y administrativas:
+
+```bash
+curl http://192.168.20.20
+curl http://192.168.20.20/paginaquenoexiste
+curl http://192.168.20.20/admin
+```
+
+**Resultado detectado en VM1** (`/var/log/apache2/access.log`):
+
+```
+192.168.20.30 - - [01/Jul/2026:22:08:09] "GET / HTTP/1.1" 200 10926 "-" "curl/8.20.0"
+192.168.20.30 - - [01/Jul/2026:22:08:54] "GET /paginaquenoexiste HTTP/1.1" 404 436
+192.168.20.30 - - [01/Jul/2026:22:09:01] "GET /admin HTTP/1.1" 404 436
+```
+
+✅ **Conclusión:** Los accesos web quedan registrados incluyendo código de respuesta HTTP, ruta solicitada y origen de la petición. Los errores 404 a rutas sensibles (`/admin`) son detectables y alertables.
+
+---
+
+## 📌 Aprendizajes clave
+
+- La **monitorización pasiva** (rsyslog) captura eventos pero no actúa en tiempo real — es el complemento ideal de un IDS activo
+- Separar los logs por tipo (`auth`, `kernel`, `warnings`) facilita enormemente el análisis y la correlación posterior en el SIEM
+- Los logs de Apache y SSH son dos de las fuentes más valiosas en un entorno real para detectar reconocimiento y fuerza bruta
+
+---
+
+## ➡️ Siguiente bloque
+
+[📂 Bloque 2 — Detección en Red y Endpoint](../bloque-2-deteccion/README.md)
