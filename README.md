@@ -34,7 +34,7 @@ Entorno casero de monitorización de seguridad que recorre de forma práctica lo
 ## 🏗️ Arquitectura
 
 <div align="center">
-  <img src="IMG_Arquitectura.png" alt="Arquitectura SentinelLab" width="820"/>
+  <img src="IMG_Arquitectura1.png" alt="Arquitectura SentinelLab" width="820"/>
   <br/>
   <sub>Red interna · 192.168.20.0/24 · VM1 (Objetivo + Sensores) · VM2 (SIEM + Gestión) · Kali (Atacante)</sub>
 </div>
