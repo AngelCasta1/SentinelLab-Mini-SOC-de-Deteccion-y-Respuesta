@@ -24,7 +24,7 @@ Demostrar de forma práctica un ciclo completo de monitorización de seguridad: 
 |---------|-----|----|----|
 | **VM1** | Objetivo + Sensores | Ubuntu Server 22.04 | 192.168.20.20 |
 | **VM2** | SIEM + Gestión | Ubuntu Server 22.04 | 192.168.20.30 |
-| **Kali** | Atacante externo | Kali Linux | DHCP (192.168.20.x) |
+| **Kali** | Atacante interno | Kali Linux | 192.168.20.40 |
 
 El equipo atacante (Kali Linux) opera desde fuera de este entorno y no cuenta como máquina del laboratorio.
 
